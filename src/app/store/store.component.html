@@ -1,0 +1,90 @@
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Shop in style</h1>
+            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section>
+    <div class="container px-4 px-sm-0 px-lg-5">
+        <div class="row">
+            <div class="col-0 col-xl-3"></div>
+            <!--Filter-->
+            <div class="col col-xl-9">
+
+                <div class="row my-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input [(ngModel)]="search" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Product" aria-label="Nombre de usuario del destinatario" aria-describedby="button-addon2">
+                            <button (click)="searcher()" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-0 col-md-3 text-center"></div>
+                    <div class="col-md-3">
+                        <div class="btn-group">
+                            <select class="form-select" [(ngModel)]="option" (change)="orderProductsbyPrice()" [value]="option">
+                                <option selected value="Product short by">Product short by</option>
+                                <option value="$0 to $50">$0 to $50</option>
+                                <option value="$51 to $100">$51 to $100</option>
+                                <option value="$101 to $150">$101 to $150</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row gx-4 row-cols-1 justify-content-center">
+            <div class="col col-12 col-xl-9 order-xl-2">
+                <!--Items-->
+                <div class="row gx-4 row-cols-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+                    <app-target-product *ngFor="let product of products;" [product]="product"></app-target-product>
+                </div>
+                <!--Navegation-->
+                <div class="row">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col col-12 col-xl-3 order-xl-1">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-1 gy-4 gx-5">
+                    <!--Category-->
+                    <div class="col">
+                        <div class="sidebar-widget category">
+                            <h2 class="title">Category</h2>
+                            <nav class="navbar bg-light">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item" *ngFor="let category of categoryes">
+                                        <a (click)="productsByCategory(category)" class="nav-link" style="cursor: pointer;">{{category}}</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--Brands-->
+                    <div class="col">
+                        <div class="sidebar-widget brands">
+                            <h2 class="title">Our Brands</h2>
+                            <ul>
+                                <li *ngFor="let brand of brands"><a (click)="productsByBrand(brand[0])" style="cursor: pointer;">{{brand[0]}}</a><span>({{brand[1]}})</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -17,7 +17,7 @@ export class TargetProductComponent implements OnInit {
   @Input() product:Product;
 
   addItemToCart(){
-    this.carrito.addProduct(this.product.id);
+    this.carrito.addProduct(this.product);
   }
 
 }

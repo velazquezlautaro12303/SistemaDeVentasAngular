@@ -16,14 +16,14 @@
                                     <th>Remove</th>
                                 </tr>
                             </thead>
-                            <tbody *ngFor="let itemCarrito of mycarrito; index as i" class="align-middle">
-                                <tr>
+                            <tbody class="align-middle">
+                                <tr *ngFor="let itemCarrito of mycarrito; index as i" >
                                   <td>
                                       <div class="img">
-                                          <p>Product Name</p>
+                                          <p>{{itemCarrito[0].nameProduct}}</p>
                                       </div>
                                   </td>
-                                  <td>$99</td>
+                                  <td>${{itemCarrito[0].price}}</td>
                                   <td>
                                       <div class="qty" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
                                           <button (click)="subtractProduct(i)" class="btn-minus"><i class="fa fa-minus"></i></button>
@@ -31,7 +31,7 @@
                                           <button (click)="addProduct(i)" class="btn-plus"><i class="fa fa-plus"></i></button>
                                       </div>
                                   </td>
-                                  <td>$99</td>
+                                  <td>${{itemCarrito[0].price * itemCarrito[1]}}</td>
                                   <td><button (click)="deleteProduct(i)"><i class="fa fa-trash"></i></button></td>
                                 </tr>
                             </tbody>
@@ -52,8 +52,8 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>Cart Summary</h1>
-                                    <p>Sub Total<span>$99</span></p>
-                                    <p>Shipping Cost<span>$1</span></p>
+                                    <p>Sub Total<span>${{total}}</span></p>
+                                    <p>Cupon<span>$0</span></p>
                                     <h2>Grand Total<span>$100</span></h2>
                                 </div>
                             </div>

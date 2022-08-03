@@ -7,26 +7,26 @@ import { Product } from '../product.model';
 
 export class MyCarritoService {
 
-  carrito:[number,number][] = [];
+  carrito:[Product,number][] = [];
 
   constructor() { }
 
-  private getIndexProduct(idProduct:number){
-    return this.carrito.findIndex(p => p[0] == idProduct);
+  private getIndexProduct(product:Product){
+    return this.carrito.findIndex(p => p[0] == product);
   }
 
-  addProduct(idProduct:number){
-    let index = this.getIndexProduct(idProduct);
+  addProduct(product:Product){
+    let index = this.getIndexProduct(product);
     if(index != -1){
       this.carrito[index][1]++;
     }
     else {
-      this.carrito.push([idProduct,1]);
+      this.carrito.push([product,1]);
     }
   }
 
-  deleteProduct(idProduct:number){
-    this.carrito.splice(this.getIndexProduct(idProduct),1);
+  deleteProduct(product:Product){
+    this.carrito.splice(this.getIndexProduct(product),1);
   }
 
 }

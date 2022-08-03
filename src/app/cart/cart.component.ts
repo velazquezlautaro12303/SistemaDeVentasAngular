@@ -14,6 +14,12 @@ export class CartComponent implements OnInit {
 
   mycarrito:[Product,number][] = [];
 
+  total = 0;
+
+  /*this.mycarrito.map(
+    (itemCarrito:[Product,number]) => itemCarrito[0].price * itemCarrito[1]).reduce(
+    (acumulador:number, itemTotal:number) => acumulador + itemTotal);*/
+
   ngOnInit(): void {
     this.mycarrito = this.myCarritoService.carrito;
   }

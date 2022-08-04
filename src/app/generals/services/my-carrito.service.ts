@@ -7,9 +7,10 @@ import { Product } from '../product.model';
 
 export class MyCarritoService {
 
-  @Output() eventCarrito :EventEmitter<[Product,number][]>;
+  @Output() eventCarrito : EventEmitter<number>;
 
   carrito:[Product,number][] = [];
+  total : number;
 
   constructor() {
     this.eventCarrito = new EventEmitter();
@@ -17,6 +18,13 @@ export class MyCarritoService {
 
   private getIndexProduct(product:Product){
     return this.carrito.findIndex(p => p[0] == product);
+  }
+
+  calculateTotal(){
+    this.total = this.carrito.length != 0 ? this.carrito.map(
+      (itemCarrito:[Product,number]) => itemCarrito[0].price * itemCarrito[1]).reduce(
+      (acumulador:number, itemTotal:number) => acumulador + itemTotal) : 0;
+    return this.total;
   }
 
   addProduct(product:Product){
@@ -31,7 +39,7 @@ export class MyCarritoService {
   }
 
   private notifyChanges(){
-    this.eventCarrito.emit(this.carrito);
+    this.eventCarrito.emit(this.calculateTotal());
   }
 
   addProductByIndex(index:number){

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../generals/product.model';
 import { DataService } from '../generals/services/data.service';
 import { MyCarritoService } from '../generals/services/my-carrito.service';
@@ -19,15 +19,13 @@ export class CartComponent implements OnInit {
 
   total = 0;
   coupon = 0;
+  methodBuy = ["Paypal","Payoneer","Check Payment","Direct Bank Transfer","Cash on Delivery "];
+  radioValue = 'A';
 
   ngOnInit(): void {
     this.mycarrito = this.myCarritoService.carrito;
-    this.myCarritoService.eventCarrito.subscribe((carrito:[Product,number][]) => {
-      this.mycarrito = carrito;
-      this.total = this.mycarrito.length != 0 ? this.mycarrito.map(
-        (itemCarrito:[Product,number]) => itemCarrito[0].price * itemCarrito[1]).reduce(
-        (acumulador:number, itemTotal:number) => acumulador + itemTotal) : 0;
-    });
+    this.total = this.myCarritoService.calculateTotal();
+    this.myCarritoService.eventCarrito.subscribe((total: number) => this.total = total );
   }
 
   subtractProduct(index:number){

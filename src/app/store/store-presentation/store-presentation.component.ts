@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../generals/services/data.service';
+import { DataService } from 'src/app/generals/services/data.service';
 
 @Component({
-  selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+  templateUrl: './store-presentation.component.html',
+  styleUrls: ['./store-presentation.component.css']
 })
-export class StoreComponent implements OnInit {
+export class StorePresentationComponent implements OnInit {
 
   constructor(
     private dataService:DataService,

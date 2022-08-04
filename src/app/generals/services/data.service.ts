@@ -18,8 +18,4 @@ export class DataService {
 
   coupon:[string, number] = ["OFERTA",100];
 
-  //Revisar luego
-  getProductById(id:number){
-    return new Product("Buzo",800,id);
-  }
 }

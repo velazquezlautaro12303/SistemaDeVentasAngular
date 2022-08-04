@@ -9,7 +9,7 @@ import { MyCarritoService } from '../generals/services/my-carrito.service';
 })
 export class TargetProductComponent implements OnInit {
 
-  constructor(private carrito:MyCarritoService) { }
+  constructor(private myCarritoService:MyCarritoService) { }
 
   ngOnInit(): void {
   }
@@ -17,7 +17,7 @@ export class TargetProductComponent implements OnInit {
   @Input() product:Product;
 
   addItemToCart(){
-    this.carrito.addProduct(this.product);
+    this.myCarritoService.addProduct(this.product);
   }
 
 }

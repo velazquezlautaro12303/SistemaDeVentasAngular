@@ -16,6 +16,8 @@ export class DataService {
 
   error = new Product("error",0,0);
 
+  coupon:[string, number] = ["OFERTA",100];
+
   //Revisar luego
   getProductById(id:number){
     return new Product("Buzo",800,id);

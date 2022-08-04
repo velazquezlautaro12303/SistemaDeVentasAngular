@@ -1,107 +1,107 @@
 
-  <!-- Cart Start -->
-  <div class="cart-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="cart-page-inner">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody class="align-middle">
-                                <tr *ngFor="let itemCarrito of mycarrito; index as i" >
-                                  <td>
-                                      <div class="img">
-                                          <p>{{itemCarrito[0].nameProduct}}</p>
-                                      </div>
-                                  </td>
-                                  <td>${{itemCarrito[0].price}}</td>
-                                  <td>
-                                      <div class="qty" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
-                                          <button (click)="subtractProduct(i)" class="btn-minus"><i class="fa fa-minus"></i></button>
-                                          <div style="font-size: 19px; padding: 0 7px; color:white; background: black;"> {{ itemCarrito[1] }} </div>
-                                          <button (click)="addProduct(i)" class="btn-plus"><i class="fa fa-plus"></i></button>
-                                      </div>
-                                  </td>
-                                  <td>${{itemCarrito[0].price * itemCarrito[1]}}</td>
-                                  <td><button (click)="deleteProduct(i)"><i class="fa fa-trash"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="cart-page-inner">
-                    <div class="row gy-4">
-                        <div class="col-md-12">
-                            <div class="coupon">
-                                <input type="text" placeholder="Coupon Code">
-                                <button>Apply Code</button>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="cart-summary">
-                                <div class="cart-content">
-                                    <h1>Cart Summary</h1>
-                                    <p>Sub Total<span>${{total}}</span></p>
-                                    <p>Cupon<span>$0</span></p>
-                                    <h2>Grand Total<span>$100</span></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="cart-summary">
-                                <div class="cart-content">
-                                    <h1>Payment Methods</h1>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
-                                        <label class="form-check-label">
-                                            Paypal
-                                        </label>
+<!-- Cart Start -->
+<div class="cart-page">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8">
+              <div class="cart-page-inner">
+                  <div class="table-responsive">
+                      <table class="table table-bordered">
+                          <thead class="thead-dark">
+                              <tr>
+                                  <th>Product</th>
+                                  <th>Price</th>
+                                  <th>Quantity</th>
+                                  <th>Total</th>
+                                  <th>Remove</th>
+                              </tr>
+                          </thead>
+                          <tbody class="align-middle">
+                              <tr *ngFor="let itemCarrito of mycarrito; index as i" >
+                                <td>
+                                    <div class="img">
+                                        <p>{{itemCarrito[0].nameProduct}}</p>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
-                                        <label class="form-check-label">
-                                            Payoneer
-                                        </label>
+                                </td>
+                                <td>${{itemCarrito[0].price}}</td>
+                                <td>
+                                    <div class="qty" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
+                                        <button (click)="subtractProduct(i)" class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <div style="font-size: 19px; padding: 0 7px; color:white; background: black;"> {{ itemCarrito[1] }} </div>
+                                        <button (click)="addProduct(i)" class="btn-plus"><i class="fa fa-plus"></i></button>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
-                                        <label class="form-check-label">
-                                            Check Payment
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
-                                        <label class="form-check-label">
-                                            Direct Bank Transfer
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
-                                        <label class="form-check-label">
-                                            Cash on Delivery
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button class="btn btn-danger" style="width: 100%;">Buy</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                </td>
+                                <td>${{itemCarrito[0].price * itemCarrito[1]}}</td>
+                                <td><button (click)="deleteProduct(i)"><i class="fa fa-trash"></i></button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4">
+              <div class="cart-page-inner">
+                  <div class="row gy-4">
+                      <div class="col-md-12">
+                          <div class="coupon">
+                              <input #codeCoupon type="text" placeholder="Coupon Code">
+                              <button (click)="applyCoupon(codeCoupon.value)">Apply Code</button>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <div class="cart-summary">
+                              <div class="cart-content">
+                                  <h1>Cart Summary</h1>
+                                  <p>Sub Total<span>${{total}}</span></p>
+                                  <p>Cupon<span>-${{coupon}}</span></p>
+                                  <h2>Grand Total<span>${{total - coupon}}</span></h2>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <div class="cart-summary">
+                              <div class="cart-content">
+                                  <h1>Payment Methods</h1>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                      <label class="form-check-label">
+                                          Paypal
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                      <label class="form-check-label">
+                                          Payoneer
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                      <label class="form-check-label">
+                                          Check Payment
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                      <label class="form-check-label">
+                                          Direct Bank Transfer
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                      <label class="form-check-label">
+                                          Cash on Delivery
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <button class="btn btn-danger" style="width: 100%;">Buy</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
 <!-- Cart End -->

@@ -1,21 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Product } from '../product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  products = [new Product("Mochila",100,1),
-              new Product("Notebook",200,2),
-              new Product("Taza",300,3),
-              new Product("Auricular",400,4),
-              new Product("Zapatilla",500,5),
-              new Product("Celular",600,6),
-              new Product("Plancha",700,7),
-              new Product("Buzo",800,8)];
 
-  error = new Product("error",0,0);
+  private url: string = environment.url;
 
-  coupon:[string, number] = ["OFERTA",100];
+  coupon:[string, number][] = [["OFERTA",100]];
+
+  constructor(
+    private http: HttpClient
+  ){ }
+
+  getProducts(pageActual:number, entriesPerPage:number){
+    let url = this.url + "?page=" + pageActual + "&entriesPerPage=" + entriesPerPage;
+    return this.http.get(url);
+  }
+
+  getCoupons(){
+    return this.http.get(this.url + "/Coupons");
+  }
+
+  getCantProductsAvailable(){
+    return this.http.get(this.url);
+  }
 
 }

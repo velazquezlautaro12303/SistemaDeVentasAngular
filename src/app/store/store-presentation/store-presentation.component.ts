@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/generals/product.model';
 import { DataService } from 'src/app/generals/services/data.service';
 
 @Component({
@@ -14,13 +15,19 @@ export class StorePresentationComponent implements OnInit {
     ) {
   }
 
-  products = [];
+  products:Product[];
   option:string = "Product short by";
   brand:string;
   search:string;
+  cantProducts:number;
+  entriesPerPage:number = 8;
+  cantPages:number;
+  pageActual = 0;
 
   ngOnInit(): void {
-    Array.prototype.push.apply(this.products,this.dataService.products);
+    this.dataService.getCantProductsAvailable().subscribe(this.cantProducts);
+    this.cantPages = this.cantProducts / this.entriesPerPage;
+    this.dataService.getProducts(this.pageActual, this.entriesPerPage).subscribe(this.products);
   }
 
 

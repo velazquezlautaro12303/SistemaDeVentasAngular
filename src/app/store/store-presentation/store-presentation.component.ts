@@ -25,9 +25,11 @@ export class StorePresentationComponent implements OnInit {
   pageActual = 0;
 
   ngOnInit(): void {
-    this.dataService.getCantProductsAvailable().subscribe(this.cantProducts);
-    this.cantPages = this.cantProducts / this.entriesPerPage;
-    this.dataService.getProducts(this.pageActual, this.entriesPerPage).subscribe(this.products);
+    // this.dataService.getCantProductsAvailable().subscribe(this.cantProducts);
+    // this.cantPages = this.cantProducts / this.entriesPerPage;
+    this.dataService.getProducts(this.pageActual, this.entriesPerPage).subscribe((products:any) => {
+      this.products = products.content;
+    });
   }
 
 

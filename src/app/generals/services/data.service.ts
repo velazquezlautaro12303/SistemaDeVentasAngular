@@ -16,13 +16,15 @@ export class DataService {
     private http: HttpClient
   ){ }
 
-  getProducts(pageActual:number, entriesPerPage:number){
-    let url = this.url + "?page=" + pageActual + "&entriesPerPage=" + entriesPerPage;
+  getProducts(pageActual:number, size:number){
+    let url = this.url + "/product";
+    // url = this.url + "?page=" + pageActual + "&entriesPerPage=" + entriesPerPage;
+    url = url + "?size=" + size;
     return this.http.get(url);
   }
 
   getCoupons(){
-    return this.http.get(this.url + "/Coupons");
+    return this.http.get(this.url + "/coupon");
   }
 
   getCantProductsAvailable(){

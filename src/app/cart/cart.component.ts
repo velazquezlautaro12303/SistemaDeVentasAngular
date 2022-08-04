@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
     this.myCarritoService.deleteProductByIndex(index);
   }
 
-  applyCoupon(codeCoupon:string){
-    this.coupon = this.dataService.coupon[0] == codeCoupon && this.total == 0 ? this.dataService.coupon[1] : 0 ;
+  applyCoupon(codeCoupon:String){
+    this.total = codeCoupon.localeCompare(this.dataService.coupon[0][0]) == 0 && this.total == 0 ? this.dataService.coupon[0][1] : 0 ;
   }
 }

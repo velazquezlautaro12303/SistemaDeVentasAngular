@@ -62,10 +62,9 @@
                           <div class="cart-summary">
                               <div class="cart-content">
                                   <h1>Payment Methods</h1>
-                                  <nz-radio-group [(ngModel)]="radioValue">
-                                    <label *ngFor="let item of methodBuy" nz-radio nzValue="item">{{item}}</label>
-                                  </nz-radio-group>
+                                  <app-input-radio-method-buy></app-input-radio-method-buy>
                               </div>
+                                <!--<label *ngFor="let item of methodBuy" nz-radio nzValue="item">asdsadsad</label>-->
                           </div>
                       </div>
                       <div class="col-md-12">

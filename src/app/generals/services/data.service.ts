@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Product } from '../product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +17,7 @@ export class DataService {
 
   getProducts(pageActual:number, size:number){
     let url = this.url + "/product";
-    // url = this.url + "?page=" + pageActual + "&entriesPerPage=" + entriesPerPage;
-    url = url + "?size=" + size;
+    url = url + "?size=" + size + "&page=" + pageActual;
     return this.http.get(url);
   }
 
@@ -29,6 +27,10 @@ export class DataService {
 
   getCantProductsAvailable(){
     return this.http.get(this.url);
+  }
+
+  checkUser(){
+    return this.http.get(this.url + "/user");
   }
 
 }

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MyCarritoService } from '../services/my-carrito.service';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,20 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(
+    private router:Router,
+    private myCarritoService: MyCarritoService,
+    private cdr: ChangeDetectorRef
+    ) { }
 
   ngOnInit(): void {
+    this.myCarritoService.eventQty.subscribe((qty: number) => {this.qty = qty;
+      this.cdr.detectChanges();});
   }
 
   logout(){
     this.router.navigate(['']);
   }
 
+  qty:number = 0;
 }

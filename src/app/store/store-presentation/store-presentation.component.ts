@@ -21,15 +21,19 @@ export class StorePresentationComponent implements OnInit {
   search:string;
   cantProducts:number;
   entriesPerPage:number = 8;
-  cantPages:number;
-  pageActual = 0;
+  total:number = 50;
+  pageIndex:number = 1;
+
+  getProducts(){
+    this.dataService.getProducts(this.pageIndex - 1, this.entriesPerPage).subscribe((products:any) => {
+      this.products = products.content;
+    });
+  }
 
   ngOnInit(): void {
     // this.dataService.getCantProductsAvailable().subscribe(this.cantProducts);
-    // this.cantPages = this.cantProducts / this.entriesPerPage;
-    this.dataService.getProducts(this.pageActual, this.entriesPerPage).subscribe((products:any) => {
-      this.products = products.content;
-    });
+    // this.total = this.cantProducts / this.entriesPerPage;
+    this.getProducts();
   }
 
 

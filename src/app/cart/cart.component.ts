@@ -20,9 +20,10 @@ export class CartComponent implements OnInit {
   total = 0;
   coupon = 0;
   methodBuy = ["Paypal","Payoneer","Check Payment","Direct Bank Transfer","Cash on Delivery "];
-  radioValue = 'A';
+  radioValue:string | null;
 
   ngOnInit(): void {
+    this.radioValue = null;
     this.mycarrito = this.myCarritoService.carrito;
     this.total = this.myCarritoService.calculateTotal();
     this.myCarritoService.eventCarrito.subscribe((total: number) => this.total = total );
@@ -42,5 +43,14 @@ export class CartComponent implements OnInit {
 
   applyCoupon(codeCoupon:String){
     this.total = codeCoupon.localeCompare(this.dataService.coupon[0][0]) == 0 && this.total == 0 ? this.dataService.coupon[0][1] : 0 ;
+  }
+
+  buy(){
+    if (this.radioValue != null){
+      this.myCarritoService.buy();
+    }
+    else{
+      alert("Seleccione metodo de pago");
+    }
   }
 }

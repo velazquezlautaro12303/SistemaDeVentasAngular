@@ -5,6 +5,7 @@ import { StoreRoutingModule } from './store-routing.module';
 import { StorePresentationComponent } from './store-presentation/store-presentation.component';
 import { TargetProductComponent } from './target-product/target-product.component';
 import { FormsModule } from '@angular/forms';
+import { DemoNgZorroAntdModule } from '../ng-zorro-antd.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     StoreRoutingModule,
-    FormsModule
+    FormsModule,
+    DemoNgZorroAntdModule
   ]
 })
 export class StoreModule { }

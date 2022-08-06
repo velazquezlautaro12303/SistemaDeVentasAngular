@@ -61,14 +61,15 @@
                       <div class="col-md-12">
                           <div class="cart-summary">
                               <div class="cart-content">
-                                  <h1>Payment Methods</h1>
-                                  <app-input-radio-method-buy></app-input-radio-method-buy>
+                                  <h1 style="margin-bottom: 0px;">Payment Methods</h1>
+                                  <nz-radio-group [(ngModel)]="radioValue">
+                                    <label *ngFor="let item of methodBuy" nz-radio [nzValue]="item" >{{item}}</label>
+                                  </nz-radio-group>
                               </div>
-                                <!--<label *ngFor="let item of methodBuy" nz-radio nzValue="item">asdsadsad</label>-->
                           </div>
                       </div>
                       <div class="col-md-12">
-                          <button class="btn btn-danger" style="width: 100%;">Buy</button>
+                          <button class="btn btn-danger" style="width: 100%;" (click)="buy()">Buy</button>
                       </div>
                   </div>
               </div>

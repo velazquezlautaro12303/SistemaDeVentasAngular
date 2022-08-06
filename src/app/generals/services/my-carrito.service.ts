@@ -8,16 +8,25 @@ import { Product } from '../product.model';
 export class MyCarritoService {
 
   @Output() eventCarrito : EventEmitter<number>;
+  @Output() eventQty : EventEmitter<number>;
 
   carrito:[Product,number][] = [];
   total : number;
+  qty:number;
 
   constructor() {
     this.eventCarrito = new EventEmitter();
+    this.eventQty = new EventEmitter();
   }
 
   private getIndexProduct(product:Product){
     return this.carrito.findIndex(p => p[0] == product);
+  }
+
+  calculateQty(){
+    return this.qty = this.carrito.length != 0 ? this.carrito.map(
+      (itemCarrito:[Product,number]) => itemCarrito[1]).reduce(
+      (acumulador:number, itemQty:number) => acumulador + itemQty) : 0;
   }
 
   calculateTotal(){
@@ -40,6 +49,7 @@ export class MyCarritoService {
 
   private notifyChanges(){
     this.eventCarrito.emit(this.calculateTotal());
+    this.eventQty.emit(this.calculateQty());
   }
 
   addProductByIndex(index:number){
@@ -57,4 +67,7 @@ export class MyCarritoService {
     this.notifyChanges();
   }
 
+  buy(){
+
+  }
 }

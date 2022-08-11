@@ -17,6 +17,7 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
+import { DetailBuyComponent } from './detail-buy/detail-buy.component';
 
 registerLocaleData(en);
 
@@ -25,7 +26,8 @@ registerLocaleData(en);
     AppComponent,
     MyAccountComponent,
     LoginComponent,
-    CartComponent
+    CartComponent,
+    DetailBuyComponent
   ],
   imports: [
     BrowserModule,

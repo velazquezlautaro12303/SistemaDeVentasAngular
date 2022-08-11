@@ -1,0 +1,29 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col col-2">
+    </div>
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">nameProduct</th>
+            <th scope="col">price</th>
+            <th scope="col">qty</th>
+            <th scope="col">total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemCarts; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.product.nameProduct}}</td>
+            <td>${{item.product.price}}</td>
+            <td>{{item.cant}}</td>
+            <td>${{item.cant * item.product.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col col-2">
+    </div>
+  </div>

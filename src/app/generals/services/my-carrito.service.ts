@@ -1,73 +1,109 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Product } from '../product.model';
+import { environment } from 'src/environments/environment';
+import { ItemCart, ItemCarts, Product, User } from '../product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class MyCarritoService {
+export class MyCartService {
 
-  @Output() eventCarrito : EventEmitter<number>;
+  @Output() eventTotalCart : EventEmitter<number>;
   @Output() eventQty : EventEmitter<number>;
+  @Output() eventNameUser : EventEmitter<String>;
+  @Output() eventCart : EventEmitter<ItemCart[]>;
 
-  carrito:[Product,number][] = [];
-  total : number;
+  private url: String = environment.url;
+
+  cart:ItemCart[] = [];
+  total:number;
   qty:number;
 
-  constructor() {
-    this.eventCarrito = new EventEmitter();
+  usuarioRegister: boolean = false;
+  user:User = new User(-1, "");
+
+  notifyChangesNameUser(){
+    this.eventNameUser.emit(this.user.nameUser);
+  }
+
+  constructor(
+    private http: HttpClient
+    ) {
+    this.eventTotalCart = new EventEmitter();
     this.eventQty = new EventEmitter();
+    this.eventNameUser = new EventEmitter();
+    this.eventCart = new EventEmitter();
+  }
+
+  notifyChangesCart(){
+    this.eventCart.emit(this.cart);
   }
 
   private getIndexProduct(product:Product){
-    return this.carrito.findIndex(p => p[0] == product);
+    return this.cart.findIndex(p => p.product.id == product.id);
   }
 
   calculateQty(){
-    return this.qty = this.carrito.length != 0 ? this.carrito.map(
-      (itemCarrito:[Product,number]) => itemCarrito[1]).reduce(
+    return this.qty = this.cart.length != 0 ? this.cart.map(
+      (itemCart:ItemCart) => itemCart.cant).reduce(
       (acumulador:number, itemQty:number) => acumulador + itemQty) : 0;
   }
 
   calculateTotal(){
-    this.total = this.carrito.length != 0 ? this.carrito.map(
-      (itemCarrito:[Product,number]) => itemCarrito[0].price * itemCarrito[1]).reduce(
-      (acumulador:number, itemTotal:number) => acumulador + itemTotal) : 0;
+    this.total = this.cart.length != 0 ? this.cart.map(
+      (itemCart:ItemCart) => itemCart.product.price * itemCart.cant).reduce(
+      (acumulator:number, itemTotal:number) => acumulator + itemTotal) : 0;
     return this.total;
   }
 
   addProduct(product:Product){
     let index = this.getIndexProduct(product);
     if(index != -1){
-      this.carrito[index][1]++;
+      this.cart[index].cant++;
     }
     else {
-      this.carrito.push([product,1]);
+      this.cart.push(new ItemCart(product,1));
     }
     this.notifyChanges();
   }
 
   private notifyChanges(){
-    this.eventCarrito.emit(this.calculateTotal());
+    this.eventTotalCart.emit(this.calculateTotal());
     this.eventQty.emit(this.calculateQty());
   }
 
+  notifyChangesUser(){
+    this.eventNameUser.emit(this.user.nameUser);
+  }
+
   addProductByIndex(index:number){
-    this.carrito[index][1]++;
+    this.cart[index].cant++;
     this.notifyChanges();
   }
 
   deleteProductByIndex(index:number){
-    this.carrito.splice(index,1);
+    this.cart.splice(index,1);
     this.notifyChanges();
   }
 
   subtractProductByIndex(index:number){
-    this.carrito[index][1]--;
+    this.cart[index].cant--;
     this.notifyChanges();
   }
 
-  buy(){
-
+  buy(methodBuyId:number, couponId:number){
+    this.http.post(this.url + "/cart",{
+      userId: this.user.id,
+      methodBuyId: methodBuyId,
+      couponId: couponId,
+      itemCarts: this.cart.map((item:ItemCart) => new ItemCarts(item.product.id, item.cant))
+    }).subscribe((any) => {
+      this.cart = [];
+      this.notifyChanges();
+      this.notifyChangesCart();
+      alert("Compra realizada");
+    });
   }
+
 }

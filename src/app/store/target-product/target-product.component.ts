@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/generals/product.model';
-import { MyCarritoService } from 'src/app/generals/services/my-carrito.service';
+import { DataService } from 'src/app/generals/services/data.service';
+import { MyCartService } from 'src/app/generals/services/my-carrito.service';
 
 @Component({
   selector: 'app-target-product',
@@ -9,7 +10,8 @@ import { MyCarritoService } from 'src/app/generals/services/my-carrito.service';
 })
 export class TargetProductComponent implements OnInit {
 
-  constructor(private myCarritoService:MyCarritoService) { }
+  constructor(private myCarritoService:MyCartService,
+    private dataService:DataService) { }
 
   ngOnInit(): void {
   }
@@ -17,7 +19,9 @@ export class TargetProductComponent implements OnInit {
   @Input() product:Product;
 
   addItemToCart(){
-    this.myCarritoService.addProduct(this.product);
+    this.myCarritoService.usuarioRegister == false ?
+      alert("Inicie sesion para proceder con las compras")
+     : this.myCarritoService.addProduct(this.product);
   }
 
 }

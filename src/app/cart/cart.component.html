@@ -17,21 +17,21 @@
                               </tr>
                           </thead>
                           <tbody class="align-middle">
-                              <tr *ngFor="let itemCarrito of mycarrito; index as i" >
+                              <tr *ngFor="let itemCarrito of mycart; index as i" >
                                 <td>
                                     <div class="img">
-                                        <p>{{itemCarrito[0].nameProduct}}</p>
+                                        <p>{{itemCarrito.product.nameProduct}}</p>
                                     </div>
                                 </td>
-                                <td>${{itemCarrito[0].price}}</td>
+                                <td>${{itemCarrito.product.price}}</td>
                                 <td>
                                     <div class="qty" style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
                                         <button (click)="subtractProduct(i)" class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <div style="font-size: 19px; padding: 0 7px; color:white; background: black;"> {{ itemCarrito[1] }} </div>
+                                        <div style="font-size: 19px; padding: 0 7px; color:white; background: black;"> {{ itemCarrito.cant }} </div>
                                         <button (click)="addProduct(i)" class="btn-plus"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </td>
-                                <td>${{itemCarrito[0].price * itemCarrito[1]}}</td>
+                                <td>${{itemCarrito.product.price * itemCarrito.cant}}</td>
                                 <td><button (click)="deleteProduct(i)"><i class="fa fa-trash"></i></button></td>
                               </tr>
                           </tbody>
@@ -53,8 +53,8 @@
                               <div class="cart-content">
                                   <h1>Cart Summary</h1>
                                   <p>Sub Total<span>${{total}}</span></p>
-                                  <p>Cupon<span>-${{coupon}}</span></p>
-                                  <h2>Grand Total<span>${{total - coupon}}</span></h2>
+                                  <p>Cupon<span>-${{coupon.discout}}</span></p>
+                                  <h2>Grand Total<span>${{total - coupon.discout}}</span></h2>
                               </div>
                           </div>
                       </div>
@@ -63,7 +63,7 @@
                               <div class="cart-content">
                                   <h1 style="margin-bottom: 0px;">Payment Methods</h1>
                                   <nz-radio-group [(ngModel)]="radioValue">
-                                    <label *ngFor="let item of methodBuy" nz-radio [nzValue]="item" >{{item}}</label>
+                                    <label *ngFor="let item of methodsBuy" nz-radio [nzValue]="item.id" >{{item.nameMethodBuy}}</label>
                                   </nz-radio-group>
                               </div>
                           </div>

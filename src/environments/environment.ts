@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "http://localhost"
+  url: "https://sistema-de-ventas-prod.herokuapp.com"
 };
 
 /*

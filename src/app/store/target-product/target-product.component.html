@@ -9,7 +9,7 @@
                 <!-- Product name-->
                 <a style="text-decoration: none; color: rgb(32, 32, 32);"><h5 class="fw-bolder">{{product.nameProduct}}</h5></a>
                 <!-- Product price-->
-                ${{product.price}}
+                $${{product.price}} - ${{product.priceAPI | number:'2.0-0'}}
             </div>
         </div>
         <!-- Product actions-->

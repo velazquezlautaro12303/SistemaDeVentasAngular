@@ -7,6 +7,10 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
 
+  getCartById(id: Number) {
+    return this.http.get(this.url + "/cart/search/getCartById?id=" + id);
+  }
+
   private url: String = environment.url;
 
   constructor(

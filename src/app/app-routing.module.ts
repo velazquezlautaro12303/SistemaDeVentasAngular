@@ -8,7 +8,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 const routes: Routes = [
   { path: '' , loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },
   { path: 'cart', component: CartComponent },
-  { path: 'my-account', component: MyAccountComponent },
+  { path: 'detail-buy', component: MyAccountComponent },
   { path: 'login', component: LoginComponent },
   { path: 'detail-buy/:id', component: DetailBuyComponent}
 ];

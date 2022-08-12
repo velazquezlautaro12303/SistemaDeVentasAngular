@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
   sales(){
     this.myCartService.usuarioRegister == false ?
       alert("Inicie sesion para poder ver sus compras")
-     : this.router.navigate(['my-account']);;
+     : this.router.navigate(['detail-buy']);;
   }
 
   qty:number = 0;

@@ -9,6 +9,7 @@ export class Product{
   id:number;
   nameProduct:string;
   price:number;
+  priceAPI:number;
 }
 
 export class ItemCart{

@@ -56,7 +56,6 @@ export class StorePresentationComponent implements OnInit {
     this.dataService.getProducts(this.pageIndex - 1, this.entriesPerPage,this.category, this.brand, this.nameProduct, minPrice!!, maxPrice!!).subscribe((products:any) => {
       this.products = products.content;
       this.total = products.totalElements;
-      this.pageIndex = 1;
     });
   }
 
